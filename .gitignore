@@ -158,4 +158,5 @@ dmypy.json
 .DS_Store
 http-v2
 selfcheck
-.idea
+simplelatexocr/api/*
+uploads

@@ -23,24 +23,23 @@ DEFAULT_CONFIG = cur_dir / "config.yaml"
 class Latex_OCR:
     def __init__(
         self,
-        config_path: Union[str, Path] = DEFAULT_CONFIG,
+        config_path: Union[str, Path] = None,
         detect_path: Union[Path, str]= None,
         encoder_path: Union[Path, str]= None,
         decoder_path: Union[Path, str]= None,
-        tokenizer_json: Union[Path, str]= None,
+        tokenizer_path: Union[Path, str]= None,
     ):
-        if detect_path is None:
-            raise FileNotFoundError("detect_path must not be None.")
 
-        if encoder_path is None:
-            raise FileNotFoundError("encoder_path must not be None.")
-
-        if decoder_path is None:
-            raise FileNotFoundError("decoder_path must not be None.")
-
-        if tokenizer_json is None:
-            raise FileNotFoundError("tokenizer_json must not be None.")
-
+        if config_path==None:
+            config_path=DEFAULT_CONFIG
+        if detect_path==None:
+            detect_path=cur_dir.parent/"models/best.onnx"
+        if encoder_path==None:
+            encoder_path=cur_dir.parent/"models/encoder.onnx"
+        if decoder_path==None:
+            decoder_path=cur_dir.parent/"models/decoder.onnx"
+        if tokenizer_path==None:
+            tokenizer_path=cur_dir.parent/"models/tokenizer.json"
         with open(config_path, "r") as f:
             args = yaml.load(f, Loader=yaml.FullLoader)
         self.args=args
@@ -54,7 +53,7 @@ class Latex_OCR:
 
         self.encoder = OrtInferSession(encoder_path)
         self.decoder = Decoder(decoder_path,self.max_seq_len)
-        self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_json)
+        self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=str(tokenizer_path))
 
     def predict(self,image):
         t1=time.time()

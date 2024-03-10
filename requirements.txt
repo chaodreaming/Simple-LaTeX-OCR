@@ -6,3 +6,4 @@ Pillow>=9.2.0
 PyYAML
 transformers
 flask
+fastapi
