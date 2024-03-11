@@ -48,12 +48,12 @@ class Latex_OCR:
         with open(config_path, "r") as f:
             args = yaml.load(f, Loader=yaml.FullLoader)
         self.args=EasyDict(args)
-        self.max_dims = [args.get("max_width",1024), args.get("max_height",512)]
-        self.min_dims = [args.get("min_width", 32), args.get("min_height", 32)]
-        self.temperature = args.get("temperature", 0.00001)
-        self.bos_token = args.get("bos_token")
-        self.eos_token = args.get("eos_token")
-        self.max_seq_len = args.get("max_seq_len",512)
+        self.max_dims = [self.args.get("max_width",1024), self.args.get("max_height",512)]
+        self.min_dims = [self.args.get("min_width", 32), self.args.get("min_height", 32)]
+        self.temperature = self.args.get("temperature", 0.00001)
+        self.bos_token = self.args.get("bos_token")
+        self.eos_token = self.args.get("eos_token")
+        self.max_seq_len = self.args.get("max_seq_len",512)
         self.pre_pro = PreProcess(detect_path,self.max_dims, self.min_dims)
 
         self.encoder = OrtInferSession(encoder_path)
