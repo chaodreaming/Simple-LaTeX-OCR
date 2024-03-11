@@ -1,6 +1,10 @@
 # Simple-LaTeX-OCR
 The encoder is resnetv2+simplevit, the decoder is transformer, the attention mechanism uses flashattention2.0 from pytorch2.0, and the dataset size is 112 million
 
+## Online experience
+
+### https://huggingface.co/spaces/chaodreaming/Simple-LaTeX-OCR
+
 Install the package `simple_latex_ocr`: 
 
 ```
