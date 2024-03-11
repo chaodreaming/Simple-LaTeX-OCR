@@ -3,10 +3,11 @@ tokenizers>=0.13.2
 numpy
 opencv-python
 Pillow>=9.2.0
-PyYAML
+PyYAML>=6.0.0
 transformers
 flask
 fastapi
 uvicorn
 simplelatexocr
 opencv-python-headless
+easydict>=1.13

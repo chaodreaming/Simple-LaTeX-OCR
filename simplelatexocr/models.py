@@ -17,6 +17,7 @@ from transformers import PreTrainedTokenizerFast
 
 from .utils import PreProcess, token2str
 from .utils_load import OrtInferSession, Decoder
+from easydict import EasyDict
 
 cur_dir = Path(__file__).resolve().parent
 DEFAULT_CONFIG = cur_dir.parent / "models/config.yaml"
@@ -46,7 +47,7 @@ class Latex_OCR:
             config_path = cur_dir.parent / "models/config.yaml"
         with open(config_path, "r") as f:
             args = yaml.load(f, Loader=yaml.FullLoader)
-        self.args=args
+        self.args=EasyDict(args)
         self.max_dims = [args.get("max_width",1024), args.get("max_height",512)]
         self.min_dims = [args.get("min_width", 32), args.get("min_height", 32)]
         self.temperature = args.get("temperature", 0.00001)

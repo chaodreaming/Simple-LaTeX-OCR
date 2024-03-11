@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='simplelatexocr',
-    version='0.0.4',
+    version='0.0.5',
     author='chaodreaming',  # 修改为你的名字或者组织名称
     author_email='chaodreaming@gmail.com',  # 修改为你的邮箱地址
     description='A simple LaTeX OCR package',  # 项目的简短描述
@@ -16,12 +16,13 @@ setup(
         'numpy',
         'opencv-python',
         'Pillow>=9.2.0',
-        'PyYAML',
+        'PyYAML>=6.0.0',
         'transformers',
         'flask',
         'fastapi',
         'uvicorn',
-        'opencv-python-headless'
+        'opencv-python-headless',
+        'easydict>=1.13'
     ],
     python_requires='>=3.8',  # 你的包支持的最小Python版本
     classifiers=[
