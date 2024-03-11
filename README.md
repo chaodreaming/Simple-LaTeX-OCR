@@ -4,7 +4,7 @@ The encoder is resnetv2+simplevit, the decoder is transformer, the attention mec
 Install the package `simplelatexocr`: 
 
 ```
-pip install -e .
+pip install simplelatexocr
 ```
 
 Use from within Python
