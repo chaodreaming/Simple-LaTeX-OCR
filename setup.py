@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='simplelatexocr',
-    version='0.0.2',
+    version='0.0.3',
     author='chaodreaming',  # 修改为你的名字或者组织名称
     author_email='chaodreaming@gmail.com',  # 修改为你的邮箱地址
     description='A simple LaTeX OCR package',  # 项目的简短描述
@@ -33,3 +33,8 @@ setup(
         'Programming Language :: Python :: 3.11',
     ],
 )
+'''
+python setup.py bdist_wheel
+python setup.py sdist
+twine upload dist/*
+'''
