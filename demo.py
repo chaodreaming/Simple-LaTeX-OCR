@@ -5,8 +5,3 @@ result = model.predict(img_path)
 print(result['formula'])
 print(result['confidence'])
 print(result['elapse'])
-# 检测耗时： 0.8744056224822998
-# 置信度为:93.11%，
-# 公式为:
-# \frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=\mathsf{1}
-# {'formula': '\\frac{x^{2}}{a^{2}}-\\frac{y^{2}}{b^{2}}=\\mathsf{1}', 'confidence': '97.21%', 'elapse': '1,897ms'}

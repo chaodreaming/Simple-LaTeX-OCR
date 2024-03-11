@@ -40,11 +40,12 @@ def download_checkpoints():
     path = Path(__file__).parent.parent/"models"
     if not os.path.exists(path):
         os.makedirs(path)
+    config="https://github.com/chaodreaming/Simple-LaTeX-OCR/releases/download/%s/config.yaml" % tag
     best='https://github.com/chaodreaming/Simple-LaTeX-OCR/releases/download/%s/best.onnx' % tag
     encoder='https://github.com/chaodreaming/Simple-LaTeX-OCR/releases/download/%s/decoder.onnx' % tag
     decoder='https://github.com/chaodreaming/Simple-LaTeX-OCR/releases/download/%s/encoder.onnx' % tag
     tokenizer='https://github.com/chaodreaming/Simple-LaTeX-OCR/releases/download/%s/tokenizer.json' % tag
-    for url, name in zip([tokenizer,best,encoder,decoder], ["tokenizer.json","best.onnx", "decoder.onnx","encoder.onnx"]):
+    for url, name in zip([config,tokenizer,best,encoder,decoder], ["config.yaml","tokenizer.json","best.onnx", "decoder.onnx","encoder.onnx"]):
         download_path=os.path.join(path, name)
         if not os.path.exists(download_path):
             print('download ', tag," ",name, 'to path', download_path)

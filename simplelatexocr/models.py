@@ -19,7 +19,7 @@ from .utils import PreProcess, token2str
 from .utils_load import OrtInferSession, Decoder
 
 cur_dir = Path(__file__).resolve().parent
-DEFAULT_CONFIG = cur_dir / "config.yaml"
+DEFAULT_CONFIG = cur_dir.parent / "models/config.yaml"
 class Latex_OCR:
     def __init__(
         self,
@@ -30,9 +30,8 @@ class Latex_OCR:
         tokenizer_path: Union[Path, str]= None,
     ):
 
-        if config_path==None:
-            config_path=DEFAULT_CONFIG
-        if detect_path ==None and encoder_path ==None and detect_path ==None and tokenizer_path ==None:
+        if config_path is None or detect_path is None or encoder_path is None or decoder_path is None or tokenizer_path is None:
+
             from simplelatexocr.get_lastest_model import download_checkpoints
             download_checkpoints()
         if detect_path==None:
@@ -43,6 +42,8 @@ class Latex_OCR:
             decoder_path=cur_dir.parent/"models/decoder.onnx"
         if tokenizer_path==None:
             tokenizer_path=cur_dir.parent/"models/tokenizer.json"
+        if config_path==None:
+            config_path = cur_dir.parent / "models/config.yaml"
         with open(config_path, "r") as f:
             args = yaml.load(f, Loader=yaml.FullLoader)
         self.args=args
