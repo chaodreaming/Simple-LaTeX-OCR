@@ -32,6 +32,9 @@ class Latex_OCR:
 
         if config_path==None:
             config_path=DEFAULT_CONFIG
+        if detect_path ==None and encoder_path ==None and detect_path ==None and tokenizer_path ==None:
+            from simplelatexocr.get_lastest_model import download_checkpoints
+            download_checkpoints()
         if detect_path==None:
             detect_path=cur_dir.parent/"models/best.onnx"
         if encoder_path==None:
@@ -89,8 +92,6 @@ class Latex_OCR:
             temperature=self.temperature,
         )
         formula = [self.post_process("".join(token2str(output, self.tokenizer)).strip()) for output in outputs]
-        for i in range(len(formula)):
-            print("confidence:{}%，\nformula为:\n{}".format(confidences[i], formula[i]))
         res = {"formula": formula[0] if len(formula) < 2 else "\\begin{array}{" + alignment + "}" + " \\\\ ".join(
             formula) + "\end{array}", "confidence": str(round(np.mean(confidences), 2)) + "%"}
         res["elapse"] = "{:,}ms".format(int((time.time() - t1) * 1000))

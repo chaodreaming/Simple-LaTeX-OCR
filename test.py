@@ -1,7 +1,7 @@
 import json
 import requests
 
-
+# python -m simplelatexocr.api.run
 image_path = "tests/test_files/1.png"
 url = "http://127.0.0.1:8502/predict"
 files = {'file': open(image_path, 'rb')}
