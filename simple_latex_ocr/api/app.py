@@ -4,10 +4,10 @@ from http import HTTPStatus
 from fastapi import FastAPI, File, UploadFile, Form
 from PIL import Image
 from io import BytesIO
-from simplelatexocr.models import Latex_OCR
+from simple_latex_ocr.models import Latex_OCR
 
 model = Latex_OCR()
-app = FastAPI(title='simplelatexocr API')
+app = FastAPI(title='simple_latex_ocr API')
 
 
 def read_imagefile(file) -> Image.Image:

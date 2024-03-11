@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from simplelatexocr.models import Latex_OCR
+from simple_latex_ocr.models import Latex_OCR
 import argparse
 
 def main():

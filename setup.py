@@ -20,12 +20,12 @@ def get_readme() -> str:
     return readme
 
 
-MODULE_NAME = "simplelatexocr"
+MODULE_NAME = "simple_latex_ocr"
 
 
 setup(
     name=MODULE_NAME,
-    version='0.0.7',
+    version='0.0.1',
     author='chaodreaming',  # 修改为你的名字或者组织名称
     author_email='chaodreaming@gmail.com',  # 修改为你的邮箱地址
     platforms="Any",
@@ -50,7 +50,7 @@ setup(
         'Programming Language :: Python :: 3.11',
     ],
     entry_points={
-        "console_scripts": ["simplelatexocr=simplelatexocr.main:main"],
+        "console_scripts": ["simple_latex_ocr=simple_latex_ocr.main:main"],
     },
 )
 '''

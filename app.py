@@ -1,7 +1,7 @@
 import requests
 from PIL import Image
 import streamlit
-from simplelatexocr.models import Latex_OCR
+from simple_latex_ocr.models import Latex_OCR
 model=Latex_OCR()
 if __name__ == '__main__':
     streamlit.set_page_config(page_title='Simple-LaTeX-OCR')

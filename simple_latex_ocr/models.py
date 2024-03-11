@@ -33,7 +33,7 @@ class Latex_OCR:
 
         if config_path is None or detect_path is None or encoder_path is None or decoder_path is None or tokenizer_path is None:
 
-            from simplelatexocr.get_lastest_model import download_checkpoints
+            from simple_latex_ocr.get_lastest_model import download_checkpoints
             download_checkpoints()
         if detect_path==None:
             detect_path=cur_dir.parent/"models/best.onnx"
