@@ -133,10 +133,13 @@ class PreProcess:
     def detect_image(self, input_image):
         # original_image: np.ndarray = cv2.imread(input_image)
         if type(input_image) == str:
-            original_image: np.ndarray = cv2.cvtColor(np.array(Image.open(input_image)), cv2.COLOR_RGB2BGR)
+            source_image=Image.open(input_image)
+        elif type(input_image)==bytes:
+            source_image=Image.open(BytesIO(input_image))
         else:
-            original_image: np.ndarray = cv2.cvtColor(np.array(Image.open(BytesIO(input_image.read()))),
-                                                      cv2.COLOR_RGB2BGR)
+            source_image =Image.open(BytesIO(input_image.read()))
+        original_image: np.ndarray = cv2.cvtColor(np.array(source_image),
+                                                  cv2.COLOR_RGB2BGR)
 
         [height, width, _] = original_image.shape
         length = max((height, width))
@@ -202,7 +205,6 @@ class PreProcess:
         # cv2.imshow('image', original_image)
         # cv2.waitKey(0)
         #########################################################
-        source_image = Image.open(input_image)
         for i in range(len(sorted_result_boxes)):
             index = sorted_result_boxes[i]
             box = boxes[index]
