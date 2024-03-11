@@ -7,3 +7,4 @@ PyYAML
 transformers
 flask
 fastapi
+uvicorn
