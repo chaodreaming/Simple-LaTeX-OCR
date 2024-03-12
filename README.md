@@ -26,10 +26,6 @@ Use from within Python
 ```bash
 $ simple_latex_ocr tests/test_files/2.png
 
-#detect img time: ： 0.8883707523345947
-#x^{2}+y^{2}=1
-#99.28%
-#1,360ms
 
 ```
 
