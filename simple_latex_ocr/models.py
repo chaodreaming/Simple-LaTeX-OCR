@@ -61,6 +61,7 @@ class Latex_OCR:
         self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=str(tokenizer_path))
 
     def predict(self,image):
+        t1=time.time()
         images, alignment = self.pre_pro.detect_image(input_image=image)
         if len(images) == 0:
 
