@@ -1,8 +1,7 @@
-import sys
+#!/usr/bin/env python
 from pathlib import Path
 from typing import List
 
-from get_pypi_latest_version import GetPyPiLatestVersion
 from setuptools import setup
 
 
@@ -24,26 +23,12 @@ def get_readme() -> str:
 
 
 
-obtainer = GetPyPiLatestVersion()
-MODULE_NAME = "simple_latex_ocr"
-try:
-    latest_version = obtainer(MODULE_NAME)
-except ValueError:
-    latest_version = "0.0.1"
-print(latest_version)
-VERSION_NUM = obtainer.version_add_one(latest_version)
 
-# 优先提取commit message中的语义化版本号，如无，则自动加1
-if len(sys.argv) > 2:
-    match_str = " ".join(sys.argv[2:])
-    matched_versions = obtainer.extract_version(match_str)
-    if matched_versions:
-        VERSION_NUM = matched_versions
-sys.argv = sys.argv[:2]
+MODULE_NAME = "simple_latex_ocr"
 
 setup(
     name=MODULE_NAME,
-    version=VERSION_NUM,
+    version="0.0.5",
     author='chaodreaming',  # 修改为你的名字或者组织名称
     author_email='chaodreaming@gmail.com',  # 修改为你的邮箱地址
     platforms="Any",
