@@ -11,4 +11,3 @@ uvicorn
 simple_latex_ocr
 opencv-python-headless
 easydict>=1.13
-PyExecJS
