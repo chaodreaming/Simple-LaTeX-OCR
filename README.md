@@ -5,6 +5,7 @@ The encoder is resnetv2+simplevit, the decoder is transformer, the attention mec
 
 ### https://huggingface.co/spaces/chaodreaming/Simple-LaTeX-OCR
 
+### https://www.modelscope.cn/studios/chaodreaming/Simple-LaTeX-OCR/summary
 Install the package `simple_latex_ocr`: 
 
 ```
