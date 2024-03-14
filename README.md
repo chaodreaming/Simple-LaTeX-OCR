@@ -43,13 +43,14 @@ Using streamlit has a nice interface, but you can only select files locally.
 ```
 streamlit run streamlit_app.py
 ```
-![img.png](img.png)
-Using flask you can copy the formula directly
+![img.png](static/images/img.png)
+
+A simple interface for uploading files can be used to edit the results using latexlive.```
 
 ```commandline
 python flask_app.py
 ```
-
+![img_1.png](static/images/img_1.png)
 
 ## Contribution
 Contributions of any kind are welcome.
