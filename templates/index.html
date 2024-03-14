@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公式OCR</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- 可选：引入jQuery和Bootstrap JS文件 -->
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>-->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- 引入KaTeX的CSS -->
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">-->
+    <!-- 引入KaTeX的JS库 -->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>-->
+    <style>
+        .iframe-container {
+            position: relative;
+            /* 设定为相对定位 */
+            width: 100%;
+            /* iframe的宽度 */
+            height: 1300px;
+            /* iframe的高度 */
+        }
+
+        .iframe-overlay {
+            position: absolute;
+            /* 覆盖层使用绝对定位 */
+            top: 30%;
+            /* 根据需要调整位置 */
+            left: 5%;
+            /* 根据需要调整位置 */
+            z-index: 10;
+            /* 确保按钮显示在iframe之上 */
+        }
+
+        .iframe-overlay-img {
+            position: absolute;
+            /* background: #000; */
+            /* 覆盖层使用绝对定位 */
+            top: 50%;
+            /* 根据需要调整位置 */
+            left: 0%;
+            /* 根据需要调整位置 */
+            z-index: 10;
+            /* 确保按钮显示在iframe之上 */
+        }
+
+        iframe {
+            width: 100%;
+            /* 填满容器 */
+            height: 100%;
+            /* 填满容器 */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('change', function (e) {
+                e.preventDefault();
+                var fileInput = document.getElementById('imageUpload');
+                var uploadedImage = document.getElementById('uploadedImage');
+
+                var file = fileInput.files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        uploadedImage.src = e.target.result; // 在图像元素中显示上传的图像
+                    }
+
+                    reader.readAsDataURL(file); // 读取文件数据作为 URL
+                }
+
+
+                const formData = new FormData(form);
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                }).then(response => response.json())
+                    .then(data => {
+                        const resultElement = document.getElementById('latexResult');
+                        // 使用KaTeX渲染LaTeX公式
+                        str = encodeURI(data.latex); // encode加密
+                        str = window.btoa(str); // base64加密
+                        let url = "https://www.latexlive.com/" + "/#" + str;
+                        console.log(url)
+                        var iframe = document.createElement('iframe');
+
+                        // 确定网址，这里直接指定了，但也可以通过其他方式获取
+                        // var url = 'https://example.com';
+
+                        // 设置 iframe 的属性
+                        iframe.setAttribute('src', url);
+                        iframe.style.width = '100%';
+                        iframe.style.height = '1400px';
+                        iframe.frameBorder = '0'; // 去除边框
+
+                        // 找到要插入 iframe 的容器
+                        var container = document.getElementById('iframe-container');
+                        console.log(container)
+                        // 清除容器内的内容（如果需要的话）
+                        // 查询容器内的所有 iframe 元素
+                        var iframes = container.querySelectorAll('iframe');
+
+                        // 遍历并移除每个 iframe
+                        iframes.forEach(function (iframe) {
+                            iframe.parentNode.removeChild(iframe);
+                        });
+
+                        // 插入创建的 iframe
+                        container.appendChild(iframe);
+                        // document.getElementById('latexlive').src = url
+                        console.log(document.getElementById('latexlive').src)
+
+
+                    }).catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+            function copyedit() {
+                const latexResultElement = document.getElementById('latexResult');
+                // 获取渲染在页面上的LaTeX公式，你可能需要根据实际情况调整获取方式
+                let str = latexResultElement.textContent || latexResultElement.innerText;
+                str = encodeURI(str); // encode加密
+                str = window.btoa(str); // base64加密
+                let url = "https://www.latexlive.com/" + "/#" + str;
+
+                copyToClip(url);
+                window.open(url, '_blank');
+            }
+
+            function copyToClip(str) {
+                // 使用临时textarea复制内容到剪切板
+                const el = document.createElement('textarea');
+                el.value = str;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                // 弹窗提示复制成功
+                alert('URL已复制到剪切板');
+            }
+
+        });
+    </script>
+    <style>
+        .main {
+            text-align: center;
+            margin: 50% auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-4 column">
+                <div class="main">
+
+                    <img id="uploadedImage" class="" src="" alt="" width="100%" height="100wh">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <input type="file" name="file" id="imageUpload" required>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-md-8 column">
+                <div class="iframe-container" id="iframe-container">
+
+                    <iframe id="latexlive" src="https://www.latexlive.com/" width="100%" height="1200"></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

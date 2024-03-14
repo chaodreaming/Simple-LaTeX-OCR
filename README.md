@@ -1,12 +1,15 @@
 # Simple-LaTeX-OCR
-The encoder is resnetv2+simplevit, the decoder is transformer, the attention mechanism uses flashattention2.0 from pytorch2.0, and the dataset size is 112 million
-
+### Performance
+| BLEU score | normed edit distance | token accuracy |
+|------------|----------------------|----------------|
+| 0.92       | 0.05                 | 0.75           |
 ## Online experience
 
 ### https://huggingface.co/spaces/chaodreaming/Simple-LaTeX-OCR
 
 ### https://www.modelscope.cn/studios/chaodreaming/Simple-LaTeX-OCR/summary
-Install the package `simple_latex_ocr`: 
+
+ Install the package `simple_latex_ocr`: 
 
 ```
 pip install simple_latex_ocr
@@ -26,8 +29,6 @@ Use from within Python
 #### Used by command line
 ```bash
 $ simple_latex_ocr tests/test_files/2.png
-
-
 ```
 
 
@@ -37,6 +38,19 @@ $ python -m simple_latex_ocr.api.run
 
 #You can use test.py to initiate a request for verification
 ```
+
+Using streamlit has a nice interface, but you can only select files locally.
+```
+streamlit run streamlit_app.py
+```
+![img.png](img.png)
+Using flask you can copy the formula directly
+
+```commandline
+python flask_app.py
+```
+
+
 ## Contribution
 Contributions of any kind are welcome.
 
