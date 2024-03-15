@@ -121,4 +121,6 @@ class Latex_OCR:
             news = re.sub(r"(%s)\s+?(%s)" % (letter, noletter), r"\1\2", news)
             if news == s:
                 break
+        # Replace \eqno with ~~~.
+        s = re.sub(r"\\eqno", "~~~", s)
         return s
