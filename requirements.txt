@@ -13,3 +13,4 @@ easydict>=1.13
 streamlit
 python-multipart
 simple_latex_ocr
+flask_cors

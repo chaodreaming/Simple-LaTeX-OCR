@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 from werkzeug.utils import secure_filename
 import os
+from flask_cors import CORS
 from simple_latex_ocr.models import Latex_OCR
 model=Latex_OCR()
 app = Flask(__name__)
+CORS(app)
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
